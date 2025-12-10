@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9f7e9;
+            border: 1px solid #b7e4b7;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Currency Converter</h1>
+
+    <label for="fromCurrency">From Currency:</label>
+    <select id="fromCurrency">
+		<option value="PHP">PHP - Philippine Peso</option>
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="SGD">SGD - Singaporean Dollar</option>
+        <option value="AUD">AUD - Australian Dollar</option>
+    </select>
+
+    <label for="toCurrency">To Currency:</label>
+    <select id="toCurrency">
+		<option value="PHP">PHP - Philippine Peso</option>
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="SGD">SGD - Singaporean Dollar</option>
+        <option value="AUD">AUD - Australian Dollar</option>
+    </select>
+
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount to convert" />
+
+    <button onclick="convertCurrency()">Convert</button>
+
+    <div id="result" class="result" style="display: none;"></div>
+</div>
+
+<script>
+    const apiKey = "YOUR_FIXER_IO_API_KEY";  // Replace with your Fixer.io API key
+    const apiUrl = `https://data.fixer.io/api/latest?access_key=${apiKey}&base=USD`;  // Fixer.io API URL
+
+    let exchangeRates = {};
+
+    // Fetch current exchange rates when the page loads
+    window.onload = function() {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    exchangeRates = data.rates;
+                } else {
+                    alert("Failed to load exchange rates. Please try again later.");
+                }
+            })
+            .catch(error => alert("Error fetching exchange rates: " + error));
+    };
+
+    function convertCurrency() {
+        const fromCurrency = document.getElementById('fromCurrency').value;
+        const toCurrency = document.getElementById('toCurrency').value;
+        const amount = parseFloat(document.getElementById('amount').value);
+
+        if (!amount || amount <= 0) {
+            alert("Please enter a valid amount.");
+            return;
+        }
+
+        if (fromCurrency === toCurrency) {
+            alert("Select different currencies to convert.");
+            return;
+        }
+
+        // Convert amount based on selected currencies
+        const rateFrom = exchangeRates[fromCurrency];
+        const rateTo = exchangeRates[toCurrency];
+        if (rateFrom && rateTo) {
+            const convertedAmount = (amount / rateFrom) * rateTo;
+
+            // Show the result
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `${amount} ${fromCurrency} is equal to ${convertedAmount.toFixed(2)} ${toCurrency}.`;
+        } else {
+            alert("Error in fetching rates. Please try again later.");
+        }
+    }
+</script>
+
+</body>
+</html>

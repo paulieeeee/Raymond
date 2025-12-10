@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US ↔ Europe Shoe Size Converter</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('leather.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 0;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.95);
+        max-width: 500px;
+        width: 90%;
+        margin: 20px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        animation: fadeIn 1s ease forwards;
+        opacity: 0;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+        color: #444;
+        text-align: left;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    select:focus, input:focus {
+        outline: none;
+        border-color: #008cba;
+        box-shadow: 0 0 8px rgba(0,140,186,0.4);
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 12px;
+        width: 100%;
+        background-color: #008cba;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #006b93;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #result {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #e1ffe1;
+        border-left: 5px solid #09a309;
+        display: none;
+        text-align: left;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>US ↔ Europe Shoe Size Converter</h2>
+
+    <label for="gender">Select Gender:</label>
+    <select id="gender">
+        <option value="men">Men's Shoes</option>
+        <option value="women">Women's Shoes</option>
+    </select>
+
+    <label for="usSize">Enter US Shoe Size:</label>
+    <input type="number" id="usSize" placeholder="Enter US size" step="0.5" />
+
+    <button onclick="convertShoeSize()">Convert</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function convertShoeSize() {
+    const gender = document.getElementById('gender').value;
+    const usSize = parseFloat(document.getElementById('usSize').value);
+    let result = '';
+    let europeSize = '';
+
+    if (isNaN(usSize) || usSize <= 0) {
+        alert("Please enter a valid shoe size.");
+        return;
+    }
+
+    // Shoe Size Conversion Logic (more precise)
+    if (gender === 'men') {
+        if (usSize >= 6 && usSize <= 12) {
+            europeSize = (usSize + 33).toFixed(1); // Example: US 6 -> EU 39.0
+        } else {
+            europeSize = "N/A (6-12 only)";
+        }
+        result = `US Men's Size ${usSize} = EU Men's Size ${europeSize}`;
+    } else {
+        if (usSize >= 5 && usSize <= 12) {
+            europeSize = (usSize + 33).toFixed(1); // Example: US 5 -> EU 38.0
+        } else {
+            europeSize = "N/A (5-12 only)";
+        }
+        result = `US Women's Size ${usSize} = EU Women's Size ${europeSize}`;
+    }
+
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = result;
+}
+</script>
+
+</body>
+</html>

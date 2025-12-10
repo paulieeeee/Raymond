@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+
+<style>
+/* Full-screen gradient background */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #000, #222);
+    font-family: Arial, sans-serif;
+    color: #ccc;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    max-width: 700px;
+    padding: 50px;
+    border-radius: 12px;
+    border: 2px solid #555;
+    background-color: rgba(0,0,0,0.6);
+    animation: fadeIn 1.5s ease forwards;
+}
+
+/* Headings and text */
+h1 {
+    font-size: 50px;
+    margin-bottom: 15px;
+    opacity: 0;
+    animation: fadeInText 1.5s 0.2s forwards;
+}
+
+p {
+    font-size: 22px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInText 1.5s 0.5s forwards;
+}
+
+/* MY PROJECTS button */
+.projects-button {
+    display: inline-block;
+    background-color: #555;
+    color: #fff;
+    padding: 18px 50px;
+    font-size: 20px;
+    border-radius: 50px; /* pill style */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInText 1.5s 0.8s forwards;
+}
+
+/* Hover effects */
+.projects-button:hover {
+    background-color: #777;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 20px #aaa, 0 0 40px #999;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInText {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hello!</h1>
+    <p>Welcome to my portfolio.</p>
+    <!-- BUTTON LINKS TO MY PROJECTS PAGE -->
+    <a class="projects-button" href="myproject.html">MY PROJECTS</a>
+</div>
+
+</body>
+</html>

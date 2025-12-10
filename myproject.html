@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Projects - Portfolio</title>
+<style>
+body {
+    margin: 0;
+    font-family: MV Boli, sans-serif;
+    background-color: #000;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: rgba(50,50,50,0.6);
+    border-radius: 12px;
+    border: 2px solid #555;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+/* Heading */
+h2 {
+    color: #eee;
+    margin-bottom: 25px;
+    font-size: 32px;
+    border-bottom: 2px solid #555;
+    display: inline-block;
+    padding-bottom: 5px;
+    opacity: 0;
+    animation: fadeInText 1.5s 0.3s forwards;
+}
+
+/* Projects buttons */
+.projects-section {
+    margin-top: 30px;
+    opacity: 0;
+    animation: fadeInText 1.5s 0.6s forwards;
+}
+
+.project-button {
+    display: inline-block;
+    background-color: #555;
+    color: #fff;
+    padding: 14px 30px;
+    margin: 8px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.project-button:hover {
+    background-color: #777;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 15px #aaa, 0 0 25px #999;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeInText {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>MY PROJECTS</h2>
+    <p>Choose a button to view it:</p>
+    <div class="projects-section">
+        <a class="project-button" href="file:///D:/geneza%20(dont%20delete)/akii.html" target="_blank">Story</a>
+        <a class="project-button" href="file:///D:/geneza%20(dont%20delete)/bike%20geneza.html" target="_blank">Bike</a>
+        <a class="project-button" href="file:///D:/geneza%20(dont%20delete)/karekare.html" target="_blank">Recipe</a>
+        <a class="project-button" href="file:///D:/geneza%20(dont%20delete)/PIZZA.html" target="_blank">Order Form</a>
+		
+	
+	<h3>JAVASCRIPT ACTIVITIES</h3>
+		<a class="project-button" href="file:///D:/geneza%20(dont%20delete)/ol%20geneza.html" target="_blank">Ordered List</a>
+        <a class="project-button" href="file:///D:/geneza%20(dont%20delete)/ul%20geneza.html" target="_blank">Unordered List</a>
+		<a class="project-button" href="file:///D:/geneza%20(dont%20delete)/shoesize.html" target="_blank">Converter</a>
+
+    </div>
+</div>
+
+</body>
+</html>

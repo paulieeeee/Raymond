@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milktea Order Form</title>
+<style>
+  body {
+    margin: 0;
+    height: 200vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('ee.jpg'); 
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 90%;
+    max-width: 1120px;
+    margin-top: 30px;
+  }
+  .description {
+    width: 42%;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 20px 14px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: #2b2b2b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .description h1 {
+    font-size: 50px;
+    color: #3b2f2f;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-shadow:
+      2px 2px 6px rgba(0,0,0,0.4),
+      0 0 10px rgba(255,215,0,0.6),
+      0 0 20px rgba(255,215,0,0.3);
+  }
+  .description img {
+    width: 88%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .description p {
+    font-size: 19.5px;
+    line-height: 2;
+    background-color: transparent;
+    padding: 6px;
+    font-weight: 500;
+  }
+  .browser-frame {
+    width: 40%;
+    background-color: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+  .form-container {
+    background-color: rgba(255,255,255,0.3);
+    background-image: url('form.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 14px 25px;
+    border-radius: 10px;
+    color: #222;
+    text-align: left;
+    backdrop-filter: blur(6px);
+  }
+  h1 { text-align: center; font-size: 16px; color: #111; margin-bottom:10px; text-transform: uppercase; letter-spacing:0.8px;}
+  .section {
+    background-color: rgba(255,255,255,0.5);
+    border-radius:6px;
+    padding:8px 15px;
+    margin-bottom:8px;
+    border:1px solid rgba(0,0,0,0.5);
+    text-align:left;
+  }
+  .section h2 {
+    font-size:11.5px;
+    margin-bottom:5px;
+    border-bottom:1px solid #000;
+    padding-bottom:3px;
+    text-transform: uppercase;
+    letter-spacing:0.3px;
+  }
+  label { font-weight:600; font-size:11px; display:block; margin-top:3px; }
+  input[type="text"], input[type="number"], input[type="email"], input[type="date"], select, textarea {
+    padding:4px;
+    border:1.3px solid #000;
+    border-radius:4px;
+    font-size:11px;
+    background-color: rgba(255,255,255,0.3);
+    margin-bottom:5px;
+    display:block;
+    text-align:left;
+    color:#000;
+  }
+  .short-input { width:70%; }
+  .contact-input { width:40%; }
+  .address-box { width:80%; height:60px; }
+  .short-select, .short-date, .short-textarea { width:70%; }
+  .card-input { width:70%; }
+  textarea { resize:none; }
+  .flavor-option {
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    font-size:11px;
+    margin-bottom:6px;
+    gap:10px;
+  }
+  .flavor-option label { flex:1; margin:0; }
+  .flavor-option select { width:50px; }
+  .price { font-weight:bold; color:#222; font-size:11px; }
+  .total-container { text-align:right; font-size:12px; font-weight:bold; margin-top:6px; border-top:1px solid #000; padding-top:5px; }
+  button {
+    background-color:#000; color:white; border:none; font-weight:bold; padding:6px; border-radius:5px;
+    cursor:pointer; width:45%; display:block; margin:10px auto 0; font-size:12px; transition:0.2s ease;
+  }
+  button:hover { background-color:#333; transform:scale(1.03);}
+  .receipt-modal {
+    display:none; position:fixed; inset:0;
+    background-color: rgba(0,0,0,0.6);
+    justify-content:center; align-items:center; z-index:10;
+  }
+  .receipt-box {
+    background-color:#fff; border-radius:12px; padding:20px 25px; width:300px;
+    box-shadow:0 4px 25px rgba(0,0,0,0.35);
+    text-align:left; font-size:12.5px; color:#333; line-height:1.6; font-family:'Calibri',sans-serif;
+  }
+  .receipt-box h2 {
+    text-align:center; color:#000; border-bottom:2px solid #000; padding-bottom:6px; margin-bottom:10px;
+    font-size:16px; text-transform:uppercase; letter-spacing:1px;
+  }
+  .receipt-section { margin-bottom:10px; padding-bottom:6px; border-bottom:1px dashed #aaa;}
+  .receipt-section strong { color:#000; font-weight:600; }
+  .close-btn { background-color:#000; color:#fff; border:none; padding:6px 14px; border-radius:5px; cursor:pointer; display:block; margin:10px auto 0; font-size:12px; }
+  .close-btn:hover { background-color:#333; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="ddata:image/jpeg;base64,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escription">
+    <h1>Yuwi's Milktea Station</h1>
+    <img src="milktea.jpg" alt="Milktea">
+    <p>W
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milktea Order Form</title>
+<style>
+  body {
+    margin: 0;
+    height: 200vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('ee.jpg'); 
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    width: 90%;
+    max-width: 1120px;
+    margin-top: 30px;
+  }
+  .description {
+    width: 42%;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 20px 14px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: #2b2b2b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .description h1 {
+    font-size: 50px;
+    color: #3b2f2f;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-shadow:
+      2px 2px 6px rgba(0,0,0,0.4),
+      0 0 10px rgba(255,215,0,0.6),
+      0 0 20px rgba(255,215,0,0.3);
+  }
+  .description img {
+    width: 88%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .description p {
+    font-size: 19.5px;
+    line-height: 2;
+    background-color: transparent;
+    padding: 6px;
+    font-weight: 500;
+  }
+  .browser-frame {
+    width: 40%;
+    background-color: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+  .form-container {
+    background-color: rgba(255,255,255,0.3);
+    background-image: url('form.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 14px 25px;
+    border-radius: 10px;
+    color: #222;
+    text-align: left;
+    backdrop-filter: blur(6px);
+  }
+  h1 { text-align: center; font-size: 16px; color: #111; margin-bottom:10px; text-transform: uppercase; letter-spacing:0.8px;}
+  .section {
+    background-color: rgba(255,255,255,0.5);
+    border-radius:6px;
+    padding:8px 15px;
+    margin-bottom:8px;
+    border:1px solid rgba(0,0,0,0.5);
+    text-align:left;
+  }
+  .section h2 {
+    font-size:11.5px;
+    margin-bottom:5px;
+    border-bottom:1px solid #000;
+    padding-bottom:3px;
+    text-transform: uppercase;
+    letter-spacing:0.3px;
+  }
+  label { font-weight:600; font-size:11px; display:block; margin-top:3px; }
+  input[type="text"], input[type="number"], input[type="email"], input[type="date"], select, textarea {
+    padding:4px;
+    border:1.3px solid #000;
+    border-radius:4px;
+    font-size:11px;
+    background-color: rgba(255,255,255,0.3);
+    margin-bottom:5px;
+    display:block;
+    text-align:left;
+    color:#000;
+  }
+  .short-input { width:70%; }
+  .contact-input { width:40%; }
+  .address-box { width:80%; height:60px; }
+  .short-select, .short-date, .short-textarea { width:70%; }
+  .card-input { width:70%; }
+  textarea { resize:none; }
+  .flavor-option {
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    font-size:11px;
+    margin-bottom:6px;
+    gap:10px;
+  }
+  .flavor-option label { flex:1; margin:0; }
+  .flavor-option select { width:50px; }
+  .price { font-weight:bold; color:#222; font-size:11px; }
+  .total-container { text-align:right; font-size:12px; font-weight:bold; margin-top:6px; border-top:1px solid #000; padding-top:5px; }
+  button {
+    background-color:#000; color:white; border:none; font-weight:bold; padding:6px; border-radius:5px;
+    cursor:pointer; width:45%; display:block; margin:10px auto 0; font-size:12px; transition:0.2s ease;
+  }
+  button:hover { background-color:#333; transform:scale(1.03);}
+  .receipt-modal {
+    display:none; position:fixed; inset:0;
+    background-color: rgba(0,0,0,0.6);
+    justify-content:center; align-items:center; z-index:10;
+  }
+  .receipt-box {
+    background-color:#fff; border-radius:12px; padding:20px 25px; width:300px;
+    box-shadow:0 4px 25px rgba(0,0,0,0.35);
+    text-align:left; font-size:12.5px; color:#333; line-height:1.6; font-family:'Calibri',sans-serif;
+  }
+  .receipt-box h2 {
+    text-align:center; color:#000; border-bottom:2px solid #000; padding-bottom:6px; margin-bottom:10px;
+    font-size:16px; text-transform:uppercase; letter-spacing:1px;
+  }
+  .receipt-section { margin-bottom:10px; padding-bottom:6px; border-bottom:1px dashed #aaa;}
+  .receipt-section strong { color:#000; font-weight:600; }
+  .close-btn { background-color:#000; color:#fff; border:none; padding:6px 14px; border-radius:5px; cursor:pointer; display:block; margin:10px auto 0; font-size:12px; }
+  .close-btn:hover { background-color:#333; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="description">
+    <h1>Yuwi's Milktea Station</h1>
+    <img src="milktea.jpg" alt="Milktea">
+    <p>Where every sip is a moment of bliss. Your favorite milk tea spot!</p>
+  </div>
+
+  <div class="browser-frame">
+    <div class="form-container">
+      <h1>Order Form</h1>
+
+      <div class="section">
+        <h2>Customer Info</h2>
+        <label>Full Name:</label>
+        <input type="text" id="custName" class="short-input" required>
+        <label>Email:</label>
+        <input type="email" id="custEmail" class="short-input" required>
+        <label>Contact Number:</label>
+        <input type="text" id="custContact" class="contact-input" maxlength="11" required>
+        <label>Address:</label>
+        <textarea id="custAddress" class="address-box" required></textarea>
+      </div>
+
+      <div class="section">
+        <h2>Order Details</h2>
+        <!-- Flavors -->
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Cookies and Cream" data-price="99"> Cookies and Cream</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Matcha Overload" data-price="90"> Matcha Overload</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Taro" data-price="120"> Taro</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Salted Caramel" data-price="120"> Salted Caramel</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Oreo Cheesecake" data-price="120"> Oreo Cheesecake</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Blueberry Cheesecake" data-price="120"> Blueberry Cheesecake</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Strawberry Cheesecake" data-price="120"> Strawberry Cheesecake</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+
+        <label>Delivery Date:</label>
+        <input type="date" id="deliveryDate" class="short-date" required>
+        <div class="total-container">Total: ₱<span id="total">0</span></div>
+        <label>Amount Paid:</label>
+        <input type="number" id="amountPaid" class="short-input" required>
+        <div class="total-container">Change: ₱<span id="change">0</span></div>
+
+        <label>Additional Note:</label>
+        <textarea id="note" class="short-textarea" placeholder="Add any special instructions..." style="height:35px;"></textarea>
+      </div>
+
+      <div class="section">
+        <h2>Payment Method</h2>
+        <select id="paymentMethod" class="short-select" required>
+          <option value="-select-">-Select-</option>
+          <option value="cod">Cash on Delivery</option>
+          <option value="gcash">GCash</option>
+          <option value="paymaya">Pay Maya</option>
+          <option value="card">Card</option>
+        </select>
+
+        <!-- GCash Fields -->
+        <div id="gcashFields" style="display:none; margin-top:6px;">
+          <label>GCash Number:</label>
+          <input type="text" id="gcashNumber" maxlength="11" class="short-input" placeholder="09XXXXXXXXX">
+          <label>GCash Password:</label>
+          <input type="password" id="gcashPass" class="short-input" placeholder="password/PIN">
+        </div>
+
+        <!-- PayMaya Fields -->
+        <div id="paymayaFields" style="display:none; margin-top:6px;">
+          <label>PayMaya Number:</label>
+          <input type="text" id="paymayaNumber" maxlength="11" class="short-input" placeholder="09XXXXXXXXX">
+          <label>PayMaya Password:</label>
+          <input type="password" id="paymayaPass" class="short-input" placeholder="password/PIN">
+        </div>
+
+        <!-- Card Fields -->
+        <div id="cardFields" style="display:none; margin-top:6px;">
+          <label>Card Number:</label>
+          <input type="password" id="cardNumber" maxlength="16" class="card-input" placeholder="Enter 16-digit card number">
+          <label>Card Password (PIN):</label>
+          <input type="password" id="cardPass" maxlength="6" class="card-input" placeholder="PIN">
+        </div>
+
+        <div id="paymentInstructions" style="font-size:11px; margin-top:6px; color:#111;"></div>
+      </div>
+
+      <button type="button" id="submitOrder">Submit Order</button>
+    </div>
+  </div>
+</div>
+
+<div class="receipt-modal" id="receiptModal">
+  <div class="receipt-box">
+    <h2>Order Receipt</h2>
+    <div id="receiptDetails"></div>
+    <button class="close-btn" onclick="closeReceipt()">OK</button>
+  </div>
+</div>
+
+<script>
+const flavors = document.querySelectorAll('.flavor-option');
+const totalDisplay = document.getElementById('total');
+const changeDisplay = document.getElementById('change');
+const paidInput = document.getElementById('amountPaid');
+
+const paymentMethod = document.getElementById('paymentMethod');
+const gcashFields = document.getElementById('gcashFields');
+const paymayaFields = document.getElementById('paymayaFields');
+const cardFields = document.getElementById('cardFields');
+
+const gcashNumber = document.getElementById('gcashNumber');
+const gcashPass = document.getElementById('gcashPass');
+const paymayaNumber = document.getElementById('paymayaNumber');
+const paymayaPass = document.getElementById('paymayaPass');
+const cardNumber = document.getElementById('cardNumber');
+const cardPass = document.getElementById('cardPass');
+
+const paymentInstructions = document.getElementById('paymentInstructions');
+
+let total = 0;
+
+function updatePrices() {
+  total = 0;
+  flavors.forEach(option => {
+    const checkbox = option.querySelector('.flavor');
+    const select = option.querySelector('.quantity');
+    const priceDisplay = option.querySelector('.price');
+    const price = parseFloat(checkbox.dataset.price);
+    const qty = parseInt(select.value) || 0;
+    if (checkbox.checked && qty > 0) {
+      const subtotal = price * qty;
+      priceDisplay.textContent = `₱${subtotal.toFixed(2)}`;
+      total += subtotal;
+    } else {
+      priceDisplay.textContent = '₱0';
+    }
+  });
+  totalDisplay.textContent = total.toFixed(2);
+  updateChange();
+}
+
+function updateChange() {
+  const paid = parseFloat(paidInput.value) || 0;
+  const change = paid - total;
+  changeDisplay.textContent = change >= 0 ? change.toFixed(2) : '0.00';
+}
+
+paymentMethod.addEventListener('change', () => {
+  const method = paymentMethod.value;
+
+  // hide all first
+  gcashFields.style.display = 'none';
+  paymayaFields.style.display = 'none';
+  cardFields.style.display = 'none';
+
+  // clear fields
+  gcashNumber.value = '';
+  gcashPass.value = '';
+  paymayaNumber.value = '';
+  paymayaPass.value = '';
+  cardNumber.value = '';
+  cardPass.value = '';
+
+  if (method === 'gcash') {
+    gcashFields.style.display = 'block';
+    paymentInstructions.textContent = 'Pay via GCash to 0917-XXXX-XXX. Enter your GCash number and password.';
+  } else if (method === 'paymaya') {
+    paymayaFields.style.display = 'block';
+    paymentInstructions.textContent = 'Pay via PayMaya to 0917-XXXX-XXX. Enter your PayMaya number and password.';
+  } else if (method === 'card') {
+    cardFields.style.display = 'block';
+    paymentInstructions.textContent = 'Enter your 16-digit card number and PIN.';
+  } else {
+    paymentInstructions.textContent = '';
+  }
+});
+
+flavors.forEach(option=>{
+  option.querySelector('.flavor').addEventListener('change', updatePrices);
+  option.querySelector('.quantity').addEventListener('change', updatePrices);
+});
+paidInput.addEventListener('input', updateChange);
+
+function validateForm(){
+  const required=['custName','custEmail','custContact','custAddress','deliveryDate','amountPaid'];
+  for(let id of required){
+    if(!document.getElementById(id).value.trim()){
+      alert("Please fill out all required fields.");
+      return false;
+    }
+  }
+
+  if(total <= 0){
+    alert("Please select at least one flavor and quantity.");
+    return false;
+  }
+
+  const paid = parseFloat(paidInput.value) || 0;
+  if(paid < total){
+    alert("Amount paid is less than the total.");
+    return false;
+  }
+
+  if(!paymentMethod.value){
+    alert("Please select a payment method.");
+    return false;
+  }
+
+  // Payment-specific validation
+  if(paymentMethod.value === 'gcash'){
+    if(!gcashNumber.value.trim() || gcashNumber.value.trim().length < 11){
+      alert("Please enter a valid GCash number (11 digits).");
+      return false;
+    }
+    if(!gcashPass.value.trim() || gcashPass.value.trim().length < 4){
+      alert("Please enter a valid GCash password/PIN (4+ characters).");
+      return false;
+    }
+  }
+
+  if(paymentMethod.value === 'paymaya'){
+    if(!paymayaNumber.value.trim() || paymayaNumber.value.trim().length < 11){
+      alert("Please enter a valid PayMaya number (11 digits).");
+      return false;
+    }
+    if(!paymayaPass.value.trim() || paymayaPass.value.trim().length < 4){
+      alert("Please enter a valid PayMaya password/PIN (4+ characters).");
+      return false;
+    }
+  }
+
+  if(paymentMethod.value === 'card'){
+    if(!cardNumber.value.trim() || cardNumber.value.trim().length < 16){
+      alert("Please enter a valid 16-digit card number.");
+      return false;
+    }
+    if(!cardPass.value.trim() || cardPass.value.trim().length < 3){
+      alert("Please enter a valid card PIN (at least 3 characters).");
+      return false;
+    }
+  }
+
+  return true;
+}
+
+document.getElementById('submitOrder').addEventListener('click',()=>{
+  if(!validateForm()) return;
+  alert(`Thank you! Your order has been submitted successfully.\nTotal: ₱${total.toFixed(2)}`);
+  showReceipt();
+});
+
+function maskNumberForReceipt(num, method){
+  if(!num) return 'N/A';
+  if(method === 'card'){
+    // show only last 4
+    const s = num.replace(/\s+/g,'');
+    return '**** **** **** ' + s.slice(-4);
+  }
+  // for gcash/paymaya show full but it's okay to format optionally
+  return num;
+}
+
+function showReceipt(){
+  const name=document.getElementById('custName').value;
+  const email=document.getElementById('custEmail').value;
+  const contact=document.getElementById('custContact').value;
+  const address=document.getElementById('custAddress').value;
+  const date=document.getElementById('deliveryDate').value;
+  const payment=paymentMethod.value;
+  const note=document.getElementById('note').value||'None';
+  const paid=parseFloat(paidInput.value) || 0;
+  const change=parseFloat(changeDisplay.textContent) || 0;
+
+  let items='';
+  flavors.forEach(option=>{
+    const checkbox=option.querySelector('.flavor');
+    const qty=parseInt(option.querySelector('.quantity').value) || 0;
+    const price=parseFloat(checkbox.dataset.price) || 0;
+    if(checkbox.checked && qty>0){
+      items+=`<p style="margin:3px 0">${checkbox.dataset.name} - ${qty} pcs (₱${(price*qty).toFixed(2)})</p>`;
+    }
+  });
+
+  // Payment info for receipt (do NOT show passwords)
+  let paymentInfo = 'N/A';
+  if(payment === 'gcash'){
+    paymentInfo = `GCash: ${maskNumberForReceipt(gcashNumber.value, 'gcash')}`;
+  } else if(payment === 'paymaya'){
+    paymentInfo = `PayMaya: ${maskNumberForReceipt(paymayaNumber.value, 'paymaya')}`;
+  } else if(payment === 'card'){
+    paymentInfo = `Card: ${maskNumberForReceipt(cardNumber.value, 'card')}`;
+  } else {
+    paymentInfo = 'Cash on Delivery';
+  }
+
+  document.getElementById('receiptDetails').innerHTML=`
+    <div class="receipt-section">
+      <strong>Customer Information</strong>
+      <p>Name: ${name}</p>
+      <p>Email: ${email}</p>
+      <p>Contact: ${contact}</p>
+      <p>Address: ${address}</p>
+    </div>
+
+    <div class="receipt-section">
+      <strong>Order Details</strong>
+      <p>Delivery Date: ${date}</p>
+      ${items}
+    </div>
+
+    <div class="receipt-section">
+      <strong>Payment Summary</strong>
+      <p>Payment Method: ${payment}</p>
+      <p>Payment Info: ${paymentInfo}</p>
+      <p>Total: ₱${total.toFixed(2)}</p>
+      <p>Amount Paid: ₱${paid.toFixed(2)}</p>
+      <p>Change: ₱${change.toFixed(2)}</p>
+    </div>
+
+    <div class="receipt-section">
+      <strong>Additional Note</strong>
+      <p>${note}</p>
+    </div>
+  `;
+  document.getElementById('receiptModal').style.display='flex';
+}
+
+function closeReceipt(){
+  document.getElementById('receiptModal').style.display='none';
+
+  // Reset form fields
+  ['custName','custEmail','custContact','custAddress','deliveryDate','amountPaid','note'].forEach(id=> {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+
+  // reset payment method and payment fields
+  paymentMethod.value = '';
+  paymentInstructions.textContent = '';
+  gcashFields.style.display = 'none';
+  paymayaFields.style.display = 'none';
+  cardFields.style.display = 'none';
+  gcashNumber.value = '';
+  gcashPass.value = '';
+  paymayaNumber.value = '';
+  paymayaPass.value = '';
+  cardNumber.value = '';
+  cardPass.value = '';
+
+  // reset flavors
+  flavors.forEach(option=>{
+    const chk = option.querySelector('.flavor');
+    const qty = option.querySelector('.quantity');
+    const priceDisplay = option.querySelector('.price');
+    if(chk) chk.checked = false;
+    if(qty) qty.value = 0;
+    if(priceDisplay) priceDisplay.textContent = '₱0';
+  });
+
+  total = 0;
+  totalDisplay.textContent = '0';
+  changeDisplay.textContent = '0';
+  document.getElementById('custName').focus();
+}
+</script>
+</body>
+</html>
+.</p>
+  </div>
+
+  <div class="browser-frame">
+    <div class="form-container">
+      <h1>Order Form</h1>
+
+      <div class="section">
+        <h2>Customer Info</h2>
+        <label>Full Name:</label>
+        <input type="text" id="custName" class="short-input" required>
+        <label>Email:</label>
+        <input type="email" id="custEmail" class="short-input" required>
+        <label>Contact Number:</label>
+        <input type="text" id="custContact" class="contact-input" maxlength="11" required>
+        <label>Address:</label>
+        <textarea id="custAddress" class="address-box" required></textarea>
+      </div>
+
+      <div class="section">
+        <h2>Order Details</h2>
+        <!-- Flavors -->
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Cookies and Cream" data-price="99"> Cookies and Cream</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Matcha Overload" data-price="90"> Matcha Overload</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Taro" data-price="120"> Taro</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Salted Caramel" data-price="120"> Salted Caramel</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Oreo Cheesecake" data-price="120"> Oreo Cheesecake</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Blueberry Cheesecake" data-price="120"> Blueberry Cheesecake</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+        <div class="flavor-option">
+          <label><input type="checkbox" class="flavor" data-name="Strawberry Cheesecake" data-price="120"> Strawberry Cheesecake</label>
+          <select class="quantity"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+          <span class="price">₱0</span>
+        </div>
+
+        <label>Delivery Date:</label>
+        <input type="date" id="deliveryDate" class="short-date" required>
+        <div class="total-container">Total: ₱<span id="total">0</span></div>
+        <label>Amount Paid:</label>
+        <input type="number" id="amountPaid" class="short-input" required>
+        <div class="total-container">Change: ₱<span id="change">0</span></div>
+
+        <label>Additional Note:</label>
+        <textarea id="note" class="short-textarea" placeholder="Add any special instructions..." style="height:35px;"></textarea>
+      </div>
+
+      <div class="section">
+        <h2>Payment Method</h2>
+        <select id="paymentMethod" class="short-select" required>
+          <option value="-select-">-Select-</option>
+          <option value="cod">Cash on Delivery</option>
+          <option value="gcash">GCash</option>
+          <option value="paymaya">Pay Maya</option>
+          <option value="card">Card</option>
+        </select>
+
+        <!-- GCash Fields -->
+        <div id="gcashFields" style="display:none; margin-top:6px;">
+          <label>GCash Number:</label>
+          <input type="text" id="gcashNumber" maxlength="11" class="short-input" placeholder="09XXXXXXXXX">
+          <label>GCash Password:</label>
+          <input type="password" id="gcashPass" class="short-input" placeholder="password/PIN">
+        </div>
+
+        <!-- PayMaya Fields -->
+        <div id="paymayaFields" style="display:none; margin-top:6px;">
+          <label>PayMaya Number:</label>
+          <input type="text" id="paymayaNumber" maxlength="11" class="short-input" placeholder="09XXXXXXXXX">
+          <label>PayMaya Password:</label>
+          <input type="password" id="paymayaPass" class="short-input" placeholder="password/PIN">
+        </div>
+
+        <!-- Card Fields -->
+        <div id="cardFields" style="display:none; margin-top:6px;">
+          <label>Card Number:</label>
+          <input type="password" id="cardNumber" maxlength="16" class="card-input" placeholder="Enter 16-digit card number">
+          <label>Card Password (PIN):</label>
+          <input type="password" id="cardPass" maxlength="6" class="card-input" placeholder="PIN">
+        </div>
+
+        <div id="paymentInstructions" style="font-size:11px; margin-top:6px; color:#111;"></div>
+      </div>
+
+      <button type="button" id="submitOrder">Submit Order</button>
+    </div>
+  </div>
+</div>
+
+<div class="receipt-modal" id="receiptModal">
+  <div class="receipt-box">
+    <h2>Order Receipt</h2>
+    <div id="receiptDetails"></div>
+    <button class="close-btn" onclick="closeReceipt()">OK</button>
+  </div>
+</div>
+
+<script>
+const flavors = document.querySelectorAll('.flavor-option');
+const totalDisplay = document.getElementById('total');
+const changeDisplay = document.getElementById('change');
+const paidInput = document.getElementById('amountPaid');
+
+const paymentMethod = document.getElementById('paymentMethod');
+const gcashFields = document.getElementById('gcashFields');
+const paymayaFields = document.getElementById('paymayaFields');
+const cardFields = document.getElementById('cardFields');
+
+const gcashNumber = document.getElementById('gcashNumber');
+const gcashPass = document.getElementById('gcashPass');
+const paymayaNumber = document.getElementById('paymayaNumber');
+const paymayaPass = document.getElementById('paymayaPass');
+const cardNumber = document.getElementById('cardNumber');
+const cardPass = document.getElementById('cardPass');
+
+const paymentInstructions = document.getElementById('paymentInstructions');
+
+let total = 0;
+
+function updatePrices() {
+  total = 0;
+  flavors.forEach(option => {
+    const checkbox = option.querySelector('.flavor');
+    const select = option.querySelector('.quantity');
+    const priceDisplay = option.querySelector('.price');
+    const price = parseFloat(checkbox.dataset.price);
+    const qty = parseInt(select.value) || 0;
+    if (checkbox.checked && qty > 0) {
+      const subtotal = price * qty;
+      priceDisplay.textContent = `₱${subtotal.toFixed(2)}`;
+      total += subtotal;
+    } else {
+      priceDisplay.textContent = '₱0';
+    }
+  });
+  totalDisplay.textContent = total.toFixed(2);
+  updateChange();
+}
+
+function updateChange() {
+  const paid = parseFloat(paidInput.value) || 0;
+  const change = paid - total;
+  changeDisplay.textContent = change >= 0 ? change.toFixed(2) : '0.00';
+}
+
+paymentMethod.addEventListener('change', () => {
+  const method = paymentMethod.value;
+
+  // hide all first
+  gcashFields.style.display = 'none';
+  paymayaFields.style.display = 'none';
+  cardFields.style.display = 'none';
+
+  // clear fields
+  gcashNumber.value = '';
+  gcashPass.value = '';
+  paymayaNumber.value = '';
+  paymayaPass.value = '';
+  cardNumber.value = '';
+  cardPass.value = '';
+
+  if (method === 'gcash') {
+    gcashFields.style.display = 'block';
+    paymentInstructions.textContent = 'Pay via GCash to 0917-XXXX-XXX. Enter your GCash number and password.';
+  } else if (method === 'paymaya') {
+    paymayaFields.style.display = 'block';
+    paymentInstructions.textContent = 'Pay via PayMaya to 0917-XXXX-XXX. Enter your PayMaya number and password.';
+  } else if (method === 'card') {
+    cardFields.style.display = 'block';
+    paymentInstructions.textContent = 'Enter your 16-digit card number and PIN.';
+  } else {
+    paymentInstructions.textContent = '';
+  }
+});
+
+flavors.forEach(option=>{
+  option.querySelector('.flavor').addEventListener('change', updatePrices);
+  option.querySelector('.quantity').addEventListener('change', updatePrices);
+});
+paidInput.addEventListener('input', updateChange);
+
+function validateForm(){
+  const required=['custName','custEmail','custContact','custAddress','deliveryDate','amountPaid'];
+  for(let id of required){
+    if(!document.getElementById(id).value.trim()){
+      alert("Please fill out all required fields.");
+      return false;
+    }
+  }
+
+  if(total <= 0){
+    alert("Please select at least one flavor and quantity.");
+    return false;
+  }
+
+  const paid = parseFloat(paidInput.value) || 0;
+  if(paid < total){
+    alert("Amount paid is less than the total.");
+    return false;
+  }
+
+  if(!paymentMethod.value){
+    alert("Please select a payment method.");
+    return false;
+  }
+
+  // Payment-specific validation
+  if(paymentMethod.value === 'gcash'){
+    if(!gcashNumber.value.trim() || gcashNumber.value.trim().length < 11){
+      alert("Please enter a valid GCash number (11 digits).");
+      return false;
+    }
+    if(!gcashPass.value.trim() || gcashPass.value.trim().length < 4){
+      alert("Please enter a valid GCash password/PIN (4+ characters).");
+      return false;
+    }
+  }
+
+  if(paymentMethod.value === 'paymaya'){
+    if(!paymayaNumber.value.trim() || paymayaNumber.value.trim().length < 11){
+      alert("Please enter a valid PayMaya number (11 digits).");
+      return false;
+    }
+    if(!paymayaPass.value.trim() || paymayaPass.value.trim().length < 4){
+      alert("Please enter a valid PayMaya password/PIN (4+ characters).");
+      return false;
+    }
+  }
+
+  if(paymentMethod.value === 'card'){
+    if(!cardNumber.value.trim() || cardNumber.value.trim().length < 16){
+      alert("Please enter a valid 16-digit card number.");
+      return false;
+    }
+    if(!cardPass.value.trim() || cardPass.value.trim().length < 3){
+      alert("Please enter a valid card PIN (at least 3 characters).");
+      return false;
+    }
+  }
+
+  return true;
+}
+
+document.getElementById('submitOrder').addEventListener('click',()=>{
+  if(!validateForm()) return;
+  alert(`Thank you! Your order has been submitted successfully.\nTotal: ₱${total.toFixed(2)}`);
+  showReceipt();
+});
+
+function maskNumberForReceipt(num, method){
+  if(!num) return 'N/A';
+  if(method === 'card'){
+    // show only last 4
+    const s = num.replace(/\s+/g,'');
+    return '**** **** **** ' + s.slice(-4);
+  }
+  // for gcash/paymaya show full but it's okay to format optionally
+  return num;
+}
+
+function showReceipt(){
+  const name=document.getElementById('custName').value;
+  const email=document.getElementById('custEmail').value;
+  const contact=document.getElementById('custContact').value;
+  const address=document.getElementById('custAddress').value;
+  const date=document.getElementById('deliveryDate').value;
+  const payment=paymentMethod.value;
+  const note=document.getElementById('note').value||'None';
+  const paid=parseFloat(paidInput.value) || 0;
+  const change=parseFloat(changeDisplay.textContent) || 0;
+
+  let items='';
+  flavors.forEach(option=>{
+    const checkbox=option.querySelector('.flavor');
+    const qty=parseInt(option.querySelector('.quantity').value) || 0;
+    const price=parseFloat(checkbox.dataset.price) || 0;
+    if(checkbox.checked && qty>0){
+      items+=`<p style="margin:3px 0">${checkbox.dataset.name} - ${qty} pcs (₱${(price*qty).toFixed(2)})</p>`;
+    }
+  });
+
+  // Payment info for receipt (do NOT show passwords)
+  let paymentInfo = 'N/A';
+  if(payment === 'gcash'){
+    paymentInfo = `GCash: ${maskNumberForReceipt(gcashNumber.value, 'gcash')}`;
+  } else if(payment === 'paymaya'){
+    paymentInfo = `PayMaya: ${maskNumberForReceipt(paymayaNumber.value, 'paymaya')}`;
+  } else if(payment === 'card'){
+    paymentInfo = `Card: ${maskNumberForReceipt(cardNumber.value, 'card')}`;
+  } else {
+    paymentInfo = 'Cash on Delivery';
+  }
+
+  document.getElementById('receiptDetails').innerHTML=`
+    <div class="receipt-section">
+      <strong>Customer Information</strong>
+      <p>Name: ${name}</p>
+      <p>Email: ${email}</p>
+      <p>Contact: ${contact}</p>
+      <p>Address: ${address}</p>
+    </div>
+
+    <div class="receipt-section">
+      <strong>Order Details</strong>
+      <p>Delivery Date: ${date}</p>
+      ${items}
+    </div>
+
+    <div class="receipt-section">
+      <strong>Payment Summary</strong>
+      <p>Payment Method: ${payment}</p>
+      <p>Payment Info: ${paymentInfo}</p>
+      <p>Total: ₱${total.toFixed(2)}</p>
+      <p>Amount Paid: ₱${paid.toFixed(2)}</p>
+      <p>Change: ₱${change.toFixed(2)}</p>
+    </div>
+
+    <div class="receipt-section">
+      <strong>Additional Note</strong>
+      <p>${note}</p>
+    </div>
+  `;
+  document.getElementById('receiptModal').style.display='flex';
+}
+
+function closeReceipt(){
+  document.getElementById('receiptModal').style.display='none';
+
+  // Reset form fields
+  ['custName','custEmail','custContact','custAddress','deliveryDate','amountPaid','note'].forEach(id=> {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+
+  // reset payment method and payment fields
+  paymentMethod.value = '';
+  paymentInstructions.textContent = '';
+  gcashFields.style.display = 'none';
+  paymayaFields.style.display = 'none';
+  cardFields.style.display = 'none';
+  gcashNumber.value = '';
+  gcashPass.value = '';
+  paymayaNumber.value = '';
+  paymayaPass.value = '';
+  cardNumber.value = '';
+  cardPass.value = '';
+
+  // reset flavors
+  flavors.forEach(option=>{
+    const chk = option.querySelector('.flavor');
+    const qty = option.querySelector('.quantity');
+    const priceDisplay = option.querySelector('.price');
+    if(chk) chk.checked = false;
+    if(qty) qty.value = 0;
+    if(priceDisplay) priceDisplay.textContent = '₱0';
+  });
+
+  total = 0;
+  totalDisplay.textContent = '0';
+  changeDisplay.textContent = '0';
+  document.getElementById('custName').focus();
+}
+</script>
+</body>
+</html>

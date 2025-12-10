@@ -1,0 +1,231 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Order Form</title>
+  <style>
+    body {
+       margin: 0;
+      height: 110vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('pizza.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: Arial, sans-serif;
+    }
+
+    .browser-frame {
+      border: 3px solid #000;
+      border-radius: 6px;
+      width: 55%;
+      max-width: 540px;
+      height: 790px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .browser-header {
+      display: flex;
+      align-items: center;
+      background-color: #c0c0c0;
+      padding: 6px 10px;
+      border-bottom: 3px solid #000;
+      justify-content: space-between;
+    }
+
+    .browser-header span {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+   
+    .form-container {
+  background-color: rgba(255, 255, 255, 0.85); /* white with 85% opacity */
+  padding: 30px;
+  border-radius: 12px;
+  width: 480px; /* adjust width as needed */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+    .form-left {
+      width: 60%;
+    }
+
+    .pizza-image {
+      width: 35%;
+      text-align: center;
+    }
+
+    .pizza-image img {
+      width: 120px;
+      height: auto;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+ .logo {
+      position: absolute;
+      top: 20px;
+      right: 200px;
+      width: 240px; /* adjust logo size */
+      height: auto;
+ }
+    label {
+      font-weight: bold;
+      margin-top: 6px;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    input[type="password"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 5px;
+      border: 2px solid #000;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .radio-group,
+    .checkbox-group {
+      margin-top: 5px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .radio-group input,
+    .checkbox-group input {
+      margin-right: 3px;
+    }
+
+    textarea {
+      height: 55px;
+      resize: none;
+    }
+
+    button {
+      background-color: white;
+      color: black;
+      border: 2px solid #000;
+      padding: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 4px;
+      width: 50%;
+      align-self: center;
+    }
+
+    button:hover {
+      background-color: #f2f2f2;
+    }
+
+    .flavors {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flavor-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    .flavor-option select {
+      width: 45px;
+      font-size: 12px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="browser-frame">
+   
+    <div class="form-container">
+  <img src="pizzahut.png" alt="Pizza Logo" class="logo">
+      <div class="form-left">
+        <h1>Pizza Order Form</h1>
+        <form>
+          <label for="fname">First Name:</label>
+          <input type="text" id="fname" name="fname" required>
+
+          <label for="lname">Last Name:</label>
+          <input type="text" id="lname" name="lname" required>
+
+          <label for="email">Email Address:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="contact">Contact Number:</label>
+          <input type="text" id="contact" name="contact" required>
+
+          <label for="delivery">Preferred Delivery Date:</label>
+          <input type="date" id="delivery" name="delivery">
+
+          <label>Size:</label>
+          <div class="radio-group">
+            <input type="radio" id="small" name="size" value="Small">
+            <label for="small">Small</label>
+            <input type="radio" id="medium" name="size" value="Medium">
+            <label for="medium">Medium</label>
+            <input type="radio" id="large" name="size" value="Large">
+            <label for="large">Large</label>
+          </div>
+
+          <label>Flavor:</label>
+          <div class="flavors">
+            <div class="flavor-option">
+              <label><input type="checkbox" name="flavor" value="Hawaiian"> Hawaiian (₱150)</label>
+              <select name="hawaiian_qty">
+                <option>1</option><option>2</option><option>3</option>
+              </select>
+            </div>
+            <div class="flavor-option">
+              <label><input type="checkbox" name="flavor" value="Pepperoni"> Pepperoni (₱140)</label>
+              <select name="pepperoni_qty">
+                <option>1</option><option>2</option><option>3</option>
+              </select>
+            </div>
+            <div class="flavor-option">
+              <label><input type="checkbox" name="flavor" value="Vegetable"> Vegetable (₱130)</label>
+              <select name="vegetable_qty">
+                <option>1</option><option>2</option><option>3</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="ccnum">Credit Card Number:</label>
+          <input type="text" id="ccnum" name="ccnum">
+
+          <label for="pin">PIN:</label>
+          <input type="password" id="pin" name="pin">
+
+          <label for="note">Additional Note:</label>
+          <textarea id="note" name="note"></textarea>
+
+          <button type="submit">Submit Order</button>
+        </form>
+      </div>
+
+      <div class="pizza-image">
+              </div>
+    </div>
+  </div>
+</body>
+</html>

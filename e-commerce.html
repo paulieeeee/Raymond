@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My E-Commerce Website</title>
+<style>
+    body {
+        font-family: Arial, Tahoma, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #111;
+        color: #eee;
+    }
+
+    header {
+        background: linear-gradient(90deg, #ff6f61, #ff8a7a);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        animation: slideDown 1s ease forwards;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+    }
+
+    header p {
+        font-size: 1.2em;
+        margin-top: 10px;
+    }
+
+    nav {
+        background-color: #222;
+        display: flex;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    nav a {
+        display: inline-block;
+        color: white;
+        padding: 15px 25px;
+        text-decoration: none;
+        transition: 0.3s;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        background-color: #ff6f61;
+        color: #fff;
+        border-radius: 8px;
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(255,111,97,0.5);
+    }
+
+    .slider {
+        position: relative;
+        max-width: 100%;
+        margin: 30px auto;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    .slides img {
+        width: 100%;
+        display: none;
+        border-radius: 15px;
+        animation: fadeIn 1s ease;
+    }
+
+    .slides img.active {
+        display: block;
+    }
+
+    section {
+        padding: 40px 20px;
+        max-width: 1000px;
+        margin: auto;
+        background-color: rgba(30,30,30,0.85);
+        margin-bottom: 20px;
+        border-radius: 12px;
+        animation: fadeIn 1s ease forwards;
+    }
+
+    h2 {
+        color: #ff6f61;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    ul li {
+        background-color: #333;
+        padding: 20px 30px;
+        border-radius: 12px;
+        transition: 0.3s;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    ul li:hover {
+        background-color: #ff6f61;
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(255,111,97,0.5);
+    }
+
+    footer {
+        background-color: #222;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        animation: slideUp 1s ease forwards;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>My E-Commerce Store</h1>
+    <p>Best products at amazing prices!</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div class="slider">
+    <div class="slides">
+        <img src="http://via.placeholder.com/800x400?text=Product+1" class="active" alt="Product 1">
+        <img src="http://via.placeholder.com/800x400?text=Product+2" alt="Product 2">
+        <img src="http://via.placeholder.com/800x400?text=Product+3" alt="Product 3">
+    </div>
+</div>
+
+<section id="about">
+    <h2>About Our Store</h2>
+    <p>We are an online store dedicated to providing high-quality products at affordable prices. Our mission is to make shopping easy and enjoyable for everyone.</p>
+</section>
+
+<section id="products">
+    <h2>Featured Products</h2>
+    <ul>
+        <li>Product 1 - $100</li>
+        <li>Product 2 - $120</li>
+        <li>Product 3 - $200</li>
+    </ul>
+</section>
+
+<footer>
+    <p>&copy; 2025 My E-Commerce Store. All rights reserved.</p>
+</footer>
+
+<script>
+let slides = document.querySelectorAll('.slides img');
+let current = 0;
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if(i === index) slide.classList.add('active');
+    });
+}
+
+function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+}
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-container">
+        <p>Email: <a href="mailto:runningdemigod@gmail.com" class="contact-link">runningdemigod@gmail.com</a></p>
+        <p>Phone: <a href="tel:09665289564" class="contact-link">0966-528-9564</a></p>
+        <p>Address: Doña Consuelo Subdivision, San Jose, Occidental Mindoro</p>
+    </div>
+</section>
+
+
+setInterval(nextSlide, 3000);
+</script>
+
+</body>
+</html>

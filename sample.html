@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Distance Converter</title>
+<style>
+    body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+    .box { background: white; padding: 15px; margin-bottom: 15px; border-radius: 6px; width: 300px; }
+    input { width: 120px; padding: 5px; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<h2>Distance Converter</h2>
+
+<!-- Miles ↔ Kilometers -->
+<div class="box">
+    <h3>Miles ↔ Kilometers</h3>
+    Miles: <input type="number" id="mi" oninput="miToKm()"><br>
+    Kilometers: <input type="number" id="km" oninput="kmToMi()">
+</div>
+
+<!-- Feet ↔ Meters -->
+<div class="box">
+    <h3>Feet ↔ Meters</h3>
+    Feet: <input type="number" id="ft" oninput="ftToM()"><br>
+    Meters: <input type="number" id="m" oninput="mToFt()">
+</div>
+
+<!-- Inches ↔ Millimeters -->
+<div class="box">
+    <h3>Inches ↔ Millimeters</h3>
+    Inches: <input type="number" id="inch" oninput="inchToMm()"><br>
+    Millimeters: <input type="number" id="mm" oninput="mmToInch()">
+</div>
+
+<script>
+// Miles ↔ Kilometers
+function miToKm(){ document.getElementById("km").value = (document.getElementById("mi").value * 1.60934).toFixed(4); }
+function kmToMi(){ document.getElementById("mi").value = (document.getElementById("km").value / 1.60934).toFixed(4); }
+
+// Feet ↔ Meters
+function ftToM(){ document.getElementById("m").value = (document.getElementById("ft").value * 0.3048).toFixed(4); }
+function mToFt(){ document.getElementById("ft").value = (document.getElementById("m").value / 0.3048).toFixed(4); }
+
+// Inches ↔ Millimeters
+function inchToMm(){ document.getElementById("mm").value = (document.getElementById("inch").value * 25.4).toFixed(4); }
+function mmToInch(){ document.getElementById("inch").value = (document.getElemen
